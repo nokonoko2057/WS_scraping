@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>タイトル</title>
+	<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+	<h2>協賛企業</h2>
+	<ul>
+		<% @links.each do |link| %>
+			<li>
+				<%= link%> <br><br>
+				<%= @imgs[link] %>
+			</li>
+		<% end %>
+	</ul>
+
+</body>
+</html>
