@@ -6,7 +6,12 @@ require './models'
 require 'open-uri'
 require 'nokogiri'
 
+
 get '/' do
+
+end
+
+get '/lit' do
 
 	@links = Array.new
 	@imgs = Hash.new
@@ -28,4 +33,23 @@ get '/' do
 		i = i + 1
 	end
 	erb :index
+end
+
+get '/irasutoya' do
+	@links = Array.new
+	@imgs = Hash.new
+	# url = 'http://www.irasutoya.com/search?q=テスト'
+	url = 'http://www.irasutoya.com/search?q=hello'
+	html = open(url).read
+	parsed_html = Nokogiri::HTML.parse(html,nil,'utf-8')
+	i = 0
+	# logger.info parsed_html.css('div#main').css('div.post-outer')
+	# logger.info parsed_html.title
+
+	parsed_html.css('div#main').css('div.post-outer').each do |node| #.css('div.boxim').css('a')
+		anchor = node.css('div#post.box').css('div.boxim').css('a').css('script')
+		logger.info anchor.text.match(/http.+png/)[0]
+	end
+
+
 end
